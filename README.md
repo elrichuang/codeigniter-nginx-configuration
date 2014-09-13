@@ -51,6 +51,13 @@ server {
             rewrite ^/(.*)$ /index.php?/$1 last;
             break;
         }
+        
+        # fixed post data to json file 405 error
+        location ~ (.*\.json)
+	{
+	    root  $root;
+	    error_page 405 =200 $1;
+	}
 
         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
         #
